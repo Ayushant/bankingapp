@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useState } from "react";
 
-const AdminLogin = () => {
+const AdminLogin = ({ onLogin }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add authentication logic here
+    onLogin(username); // Pass the username to the onLogin prop
+  };
+
   return (
     <div>
       <h2>Admin Login</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Username:
-          <input type="text" name="username" />
+          <input
+            type="text"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </label>
         <br />
         <label>
           Password:
-          <input type="password" name="password" />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </label>
         <br />
         <button type="submit">Login</button>
